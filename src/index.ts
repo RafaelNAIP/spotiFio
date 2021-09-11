@@ -3,6 +3,8 @@ import express from 'express'
 
 import './database'
 import userRouter from './routes/users'
+import artistRouter from './routes/artists'
+import musicRouter from './routes/musics'
 
 const app = express()
 
@@ -13,3 +15,5 @@ app.listen(3333, () => {
 })
 
 app.use(userRouter)
+app.use(artistRouter)
+app.use(musicRouter)
