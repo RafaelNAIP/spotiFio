@@ -1,3 +1,4 @@
+import { hash } from "bcryptjs"
 import { Request, Response, Router } from "express"
 import { getCustomRepository } from "typeorm"
 import UserRepository from "../repositories/UsersRepository"
@@ -18,11 +19,13 @@ userRouter.post("/user", async (request, response) => {
 
   const createUser = new createUserService()
 
+  const hashesPassword = await hash(password, 8)
+
   const user = await createUser.execute({
     name,
     birthDate,
     email,
-    password
+    password: hashesPassword
   })
 
   return response.json(user)

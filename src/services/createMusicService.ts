@@ -1,4 +1,5 @@
 import { getCustomRepository } from "typeorm";
+import AppError from "../errors/AppError";
 import Musics from "../models/Musics";
 import MusicsRepository from "../repositories/MusicRepository";
 
@@ -18,7 +19,7 @@ class CreateMusicService {
     )
 
     if (findMusicWithSameName) {
-      throw Error('This music already exists')
+      throw new AppError('This music already exists')
     }
     
     const music = musicRepository.create({

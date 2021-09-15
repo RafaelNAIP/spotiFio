@@ -2,6 +2,7 @@ import { getRepository } from "typeorm";
 import Artist from "../models/Artist";
 
 import { hash } from 'bcryptjs' 
+import AppError from "../errors/AppError";
 
 interface Request {
   name: string,
@@ -19,7 +20,7 @@ class CreateArtistService {
     })
 
     if (checkUsersExists) {
-      throw new Error('Email adress already used')
+      throw new AppError('Email adress already used')
     }
 
     const hashesPassword = await hash(password, 8)
